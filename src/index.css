@@ -3,6 +3,9 @@ body {
   font-family: ink free;
   background: linear-gradient(to left, #5fc3e4 0%, #e55d87 100%);
 }
+button {
+  cursor: pointer;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
