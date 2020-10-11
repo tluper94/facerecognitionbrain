@@ -41,6 +41,13 @@ class App extends Component {
       box: {},
       route: 'signin',
       isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: '',
+      },
     };
   }
 
@@ -70,23 +77,52 @@ class App extends Component {
     this.setState({ imageUrl: this.state.input });
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then((response) =>
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      )
-      .catch((err) => console.log('Error'));
+      .then((response) => {
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              console.log(count);
+              this.setState(Object.assign(this.state.user, { entries: count }));
+            });
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      })
+      .catch((err) => console.log('Error', err));
   };
 
   onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState({ isSignedIn: false });
+      this.setState({ imageUrl: '' });
+      this.setState({ box: {} });
     } else if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
     this.setState({ route: route });
   };
 
+  getUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined,
+      },
+    });
+    console.log('App', data);
+  };
+
   render() {
-    const { isSignedIn, box, route, imageUrl } = this.state;
+    const { isSignedIn, box, route, imageUrl, user } = this.state;
     const { onRouteChange, onInputChange, onSubmit } = this;
     return (
       <div className='App'>
@@ -95,16 +131,16 @@ class App extends Component {
         {route === 'home' ? (
           <div>
             <Logo />
-            <Rank />
+            <Rank user={user} />
             <ImageLinkForm onInputChange={onInputChange} onSubmit={onSubmit} />
             <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
         ) : route === 'signin' ? (
-          <Signin onRouteChange={onRouteChange} />
+          <Signin getUser={this.getUser} onRouteChange={onRouteChange} />
         ) : route === 'register' ? (
-          <Register onRouteChange={onRouteChange} />
+          <Register getUser={this.getUser} onRouteChange={onRouteChange} />
         ) : (
-          <Signin onRouteChange={onRouteChange} />
+          <Signin getUser={this.getUser} onRouteChange={onRouteChange} />
         )}
       </div>
     );

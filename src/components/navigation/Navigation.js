@@ -16,7 +16,7 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
     return (
       <nav className='flex justify-end'>
         <p
-          onClick={() => onRouteChange('home')}
+          onClick={() => onRouteChange('signin')}
           className='f3 link dim black underline pa3 pointer'
         >
           Sign In
