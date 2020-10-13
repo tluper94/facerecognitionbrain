@@ -17,7 +17,6 @@ const Signin = ({ onRouteChange, getUser, route }) => {
 
   // Submits users email and password to backend for validation
   const onSubmitSignIn = () => {
-    console.log(email, password);
     fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: { 'content-type': 'application/json' },
@@ -29,6 +28,7 @@ const Signin = ({ onRouteChange, getUser, route }) => {
       .then((response) => response.json())
       .then((user) => {
         if (user.id) {
+          console.log(user.id)
           getUser(user);
           onRouteChange('home');
         } else {

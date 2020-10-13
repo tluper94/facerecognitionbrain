@@ -27,8 +27,8 @@ const Register = ({ onRouteChange, getUser, route }) => {
     })
       .then((response) => response.json())
       .then((user) => {
-        console.log('Response', user);
         if (user.id) {
+          console.log(user.id)
           onRouteChange('home');
           getUser(user);
         } else {

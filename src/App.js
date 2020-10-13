@@ -77,7 +77,6 @@ const App = () => {
           })
             .then((response) => response.json())
             .then((count) => {
-              console.log(count);
               setUser({ ...user, entries: count });
             });
         }
@@ -91,6 +90,7 @@ const App = () => {
       setIsSignedIn(false);
       setImageUrl('');
       setBox({});
+      setUser({});
     } else if (route === 'home') {
       setIsSignedIn(true);
     }
@@ -105,7 +105,6 @@ const App = () => {
       entries: data.entries,
       joined: data.joined,
     });
-    console.log('App', data);
   };
   return (
     <div className='App'>
