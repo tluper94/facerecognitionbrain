@@ -17,7 +17,7 @@ const Signin = ({ onRouteChange, getUser, route }) => {
 
 	// Submits users email and password to backend for validation
 	const onSubmitSignIn = () => {
-		fetch('http://localhost:3000/signin', {
+		fetch('https://pacific-taiga-60318.herokuapp.com/signin', {
 			method: 'post',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({

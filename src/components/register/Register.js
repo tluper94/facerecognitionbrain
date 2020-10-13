@@ -16,7 +16,7 @@ const Register = ({ onRouteChange, getUser, route }) => {
 	};
 
 	const onRegisterSubmit = () => {
-		fetch('http://localhost:3000/register', {
+		fetch('https://pacific-taiga-60318.herokuapp.com/register', {
 			method: 'post',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({

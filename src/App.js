@@ -73,7 +73,7 @@ const App = () => {
 		//Sets imageUrl state to user input state
 		setImageUrl(input);
 		//Submits imageUrl to clarifia api
-		fetch('http://localhost:3000/imageurl', {
+		fetch('https://pacific-taiga-60318.herokuapp.com/imageurl', {
 			method: 'post',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({
@@ -84,7 +84,7 @@ const App = () => {
 			.then((response) => {
 				//Sends user id to backend to increment user entries everytime user submit an image
 				if (response) {
-					fetch('http://localhost:3000/image', {
+					fetch('https://pacific-taiga-60318.herokuapp.com/image', {
 						method: 'put',
 						headers: { 'content-type': 'application/json' },
 						body: JSON.stringify({
