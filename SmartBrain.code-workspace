@@ -7,5 +7,11 @@
 			"path": "..\\smart-brain-api"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.rulers": [
+		
+		],
+		"editor.formatOnSave": true,
+	}
+	
 }
