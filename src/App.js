@@ -79,7 +79,7 @@ const App = () => {
   const onSubmit = () => {
     //Sets imageUrl state to user input state
     setImageUrl(input);
-    //Submits imageUrl  state to clarifia api 
+    //Submits imageUrl to clarifia api 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, input)
       .then((response) => {
