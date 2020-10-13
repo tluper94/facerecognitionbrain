@@ -4,14 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "..\\smart-brain-api"
+			"path": "..\\smartbrainapi"
 		}
-	],
-	"settings": {
-		"editor.rulers": [
-		
-		],
-		"editor.formatOnSave": true,
-	}
-	
+	]
 }
